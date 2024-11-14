@@ -43,7 +43,7 @@ MPS.16S@sam_data$Subject_ID %in% sample_names(MPS.metabs)
 sample_names(MPS.16S) <- MPS.16S@sam_data$Subject_ID
 taxa_names(MPS.16S) <- make.unique(paste(MPS.16S@tax_table[,6]))
 
-sample_data(MPS.metabs) <- sample_data(MPS.16S)
+
 ```
 
 # Reorder phyloseq so they are in the same order
@@ -54,7 +54,9 @@ MPS.metabs <- phyloseq(MPS.metabs@otu_table[, sample_names(MPS.16S)],
                        tax_table(MPS.metabs))
 
 sample_names(MPS.16S) == sample_names(MPS.metabs)
+sample_data(MPS.metabs) <- sample_data(MPS.16S)
 ```
+
 In order to reduce dimensions a bit we will aggregate microbiome data on Genus level. We are also not interested in Xenobiotics from the metabolomics panel.
 
 ```{r}
@@ -138,7 +140,7 @@ We can use either a circle plot, or a heatmap to visualize the correlations betw
 
 ```{r}
 plotVar(rcc.MPS, var.names = c(TRUE, TRUE),
-        cex = c(6, 6), cutoff = 0.5,
+        cex = c(3, 3), cutoff = 0.5,
         title = '(b) Nutrimouse, rCCA shrinkage comp 1 - 2')
 ```
 
