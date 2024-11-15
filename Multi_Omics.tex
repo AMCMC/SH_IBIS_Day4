@@ -1,0 +1,445 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Forth Day Multi Omics},
+  pdfauthor={Mark davids},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Forth Day Multi Omics}
+\author{Mark davids}
+\date{15 November, 2024}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(vegan)}
+\FunctionTok{library}\NormalTok{(phyloseq)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(microbiome)}
+\FunctionTok{library}\NormalTok{(ggpubr)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(mixOmics)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{multi-omics}{%
+\section{Multi Omics}\label{multi-omics}}
+
+Here we will explore two methods for ``multiomics'' analysis. The
+dataset used are baseline samples from the MPS study, which is composed
+of healthy FMT donors and the metSyn patients. The two omics datasets
+are fecal microbiome composition and fasted plasma metabolomics.
+
+During the first analysis we will test if distance matrix of each of the
+two datasets have similar structures. The second analysis consists of a
+Regularized Canonical Correlation Analysis with which we will try to
+identify between datasets relation ships.
+
+\hypertarget{load-and-subset-to-equal-datasets}{%
+\section{Load and subset to equal
+datasets}\label{load-and-subset-to-equal-datasets}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MPS.metabs }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"MPS.metabs.RDS"}\NormalTok{)}
+\FunctionTok{taxa\_names}\NormalTok{(MPS.metabs) }\OtherTok{\textless{}{-}}\NormalTok{ MPS.metabs}\SpecialCharTok{@}\NormalTok{tax\_table[,}\StringTok{"BIOCHEMICAL"}\NormalTok{]}
+
+\NormalTok{MPS}\FloatTok{.16}\NormalTok{S }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"MPS.16S.triads.mod.RDS"}\NormalTok{)}
+\NormalTok{MPS}\FloatTok{.16}\NormalTok{S }\OtherTok{\textless{}{-}} \FunctionTok{prune\_samples}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S}\SpecialCharTok{@}\NormalTok{sam\_data}\SpecialCharTok{$}\NormalTok{Sample\_Type}\SpecialCharTok{!=}\StringTok{"PostFMT"}\NormalTok{, MPS}\FloatTok{.16}\NormalTok{S)}
+\NormalTok{MPS}\FloatTok{.16}\NormalTok{S}\SpecialCharTok{@}\NormalTok{sam\_data}\SpecialCharTok{$}\NormalTok{Subject\_ID }\SpecialCharTok{\%in\%} \FunctionTok{sample\_names}\NormalTok{(MPS.metabs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [31] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sample\_names}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S) }\OtherTok{\textless{}{-}}\NormalTok{ MPS}\FloatTok{.16}\NormalTok{S}\SpecialCharTok{@}\NormalTok{sam\_data}\SpecialCharTok{$}\NormalTok{Subject\_ID}
+\FunctionTok{taxa\_names}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S) }\OtherTok{\textless{}{-}} \FunctionTok{make.unique}\NormalTok{(}\FunctionTok{paste}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S}\SpecialCharTok{@}\NormalTok{tax\_table[,}\DecValTok{6}\NormalTok{]))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{reorder-phyloseq-so-they-are-in-the-same-order}{%
+\section{Reorder phyloseq so they are in the same
+order}\label{reorder-phyloseq-so-they-are-in-the-same-order}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sample\_names}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S) }\SpecialCharTok{==} \FunctionTok{sample\_names}\NormalTok{(MPS.metabs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MPS.metabs }\OtherTok{\textless{}{-}} \FunctionTok{phyloseq}\NormalTok{(MPS.metabs}\SpecialCharTok{@}\NormalTok{otu\_table[, }\FunctionTok{sample\_names}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S)],}
+                       \FunctionTok{tax\_table}\NormalTok{(MPS.metabs))}
+
+\FunctionTok{sample\_names}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S) }\SpecialCharTok{==} \FunctionTok{sample\_names}\NormalTok{(MPS.metabs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [31] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sample\_data}\NormalTok{(MPS.metabs) }\OtherTok{\textless{}{-}} \FunctionTok{sample\_data}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S)}
+\end{Highlighting}
+\end{Shaded}
+
+In order to reduce dimensions a bit we will aggregate microbiome data on
+Genus level. We are also not interested in Xenobiotics from the
+metabolomics panel.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MPS}\FloatTok{.16}\NormalTok{S }\OtherTok{\textless{}{-}}\NormalTok{ microbiome}\SpecialCharTok{::}\FunctionTok{aggregate\_taxa}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S, }\StringTok{"Genus"}\NormalTok{)}
+\NormalTok{MPS.metabs }\OtherTok{\textless{}{-}} \FunctionTok{prune\_taxa}\NormalTok{(}\SpecialCharTok{!}\NormalTok{MPS.metabs}\SpecialCharTok{@}\NormalTok{tax\_table[,}\StringTok{"SUPER PATHWAY"}\NormalTok{] }\SpecialCharTok{\%in\%} \StringTok{"Xenobiotics"}\NormalTok{ , MPS.metabs)}
+\end{Highlighting}
+\end{Shaded}
+
+For the CCA it is better to reduce the number of features. We will
+reduce it by only selecting 100 features with the highest variability.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nfeat}\OtherTok{=}\DecValTok{100}
+\NormalTok{asvs }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(microbiome}\SpecialCharTok{::}\FunctionTok{transform}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S, }\StringTok{"Z"}\NormalTok{)}\SpecialCharTok{@}\NormalTok{otu\_table}\SpecialCharTok{@}\NormalTok{.Data,}\DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{sum}\NormalTok{(}\FunctionTok{abs}\NormalTok{(x))) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{sort}\NormalTok{(}\AttributeTok{decreasing =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(nfeat) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{names}\NormalTok{()}
+
+\NormalTok{MPS}\FloatTok{.16}\NormalTok{S.reduced }\OtherTok{\textless{}{-}} \FunctionTok{prune\_taxa}\NormalTok{(asvs, MPS}\FloatTok{.16}\NormalTok{S)}
+
+\NormalTok{metabs }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(microbiome}\SpecialCharTok{::}\FunctionTok{transform}\NormalTok{(MPS.metabs, }\StringTok{"Z"}\NormalTok{)}\SpecialCharTok{@}\NormalTok{otu\_table}\SpecialCharTok{@}\NormalTok{.Data,}\DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{sum}\NormalTok{(}\FunctionTok{abs}\NormalTok{(x))) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{sort}\NormalTok{(}\AttributeTok{decreasing =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(nfeat) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{names}\NormalTok{()}
+
+\NormalTok{MPS.metabs.reduced }\OtherTok{\textless{}{-}} \FunctionTok{prune\_taxa}\NormalTok{(metabs, MPS.metabs)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{regular-ordination}{%
+\section{Regular ordination}\label{regular-ordination}}
+
+First we have a look at the datasets individually.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot\_ordination}\NormalTok{(}\AttributeTok{physeq =}\NormalTok{ MPS}\FloatTok{.16}\NormalTok{S.reduced, }\AttributeTok{ordination =} \FunctionTok{ordinate}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S.reduced, }\StringTok{"PCoA"}\NormalTok{, }\StringTok{"bray"}\NormalTok{), }\AttributeTok{color=}\StringTok{"Sample\_Type"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"PCoA Microbiome"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Multi_Omics_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot\_ordination}\NormalTok{(}\AttributeTok{physeq =}\NormalTok{ MPS.metabs.reduced, }\AttributeTok{ordination =} \FunctionTok{ordinate}\NormalTok{(MPS.metabs.reduced, }\StringTok{"PCoA"}\NormalTok{, }\StringTok{"bray"}\NormalTok{), }\AttributeTok{color=}\StringTok{"Sample\_Type"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"PCoA Metabolites"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Multi_Omics_files/figure-latex/unnamed-chunk-6-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{distance}\NormalTok{(}\AttributeTok{physeq =}\NormalTok{ MPS}\FloatTok{.16}\NormalTok{S, }\StringTok{"bray"}\NormalTok{)}
+\FunctionTok{adonis2}\NormalTok{(d}\SpecialCharTok{\textasciitilde{}}\NormalTok{MPS}\FloatTok{.16}\NormalTok{S}\SpecialCharTok{@}\NormalTok{sam\_data}\SpecialCharTok{$}\NormalTok{Sample\_Type)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Permutation test for adonis under reduced model
+## Terms added sequentially (first to last)
+## Permutation: free
+## Number of permutations: 999
+## 
+## adonis2(formula = d ~ MPS.16S@sam_data$Sample_Type)
+##                              Df SumOfSqs      R2      F Pr(>F)  
+## MPS.16S@sam_data$Sample_Type  1   0.1732 0.03839 1.6768  0.062 .
+## Residual                     42   4.3394 0.96161                
+## Total                        43   4.5127 1.00000                
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{distance}\NormalTok{(}\AttributeTok{physeq =}\NormalTok{ MPS.metabs, }\StringTok{"bray"}\NormalTok{)}
+\FunctionTok{adonis2}\NormalTok{(d}\SpecialCharTok{\textasciitilde{}}\NormalTok{MPS.metabs}\SpecialCharTok{@}\NormalTok{sam\_data}\SpecialCharTok{$}\NormalTok{Sample\_Type)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Permutation test for adonis under reduced model
+## Terms added sequentially (first to last)
+## Permutation: free
+## Number of permutations: 999
+## 
+## adonis2(formula = d ~ MPS.metabs@sam_data$Sample_Type)
+##                                 Df SumOfSqs     R2      F Pr(>F)    
+## MPS.metabs@sam_data$Sample_Type  1  0.13204 0.0672 3.0257  0.001 ***
+## Residual                        42  1.83292 0.9328                  
+## Total                           43  1.96497 1.0000                  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+Not obvious from the ordination, but there is a significant difference
+in plasma metabolites between healthy donors and metsyn subjects.
+
+\hypertarget{procrustes}{%
+\section{Procrustes}\label{procrustes}}
+
+We will use procrustes to test coherence between the two datasets. In
+order to run procrustes we will need ordinations of the dataset. For 16S
+we use default Bray-Curtis distance. For metabolites we will use regular
+euclidean distance. For both sets we will use PCoA for ordination.
+
+To test the probability of getting a better fit, we will perform the
+protest permutation test.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ord}\FloatTok{.16}\NormalTok{S }\OtherTok{\textless{}{-}} \FunctionTok{ordinate}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S, }\StringTok{"PCoA"}\NormalTok{, }\StringTok{"bray"}\NormalTok{)}
+\CommentTok{\#ord.metabs \textless{}{-} ordinate(microbiome::transform(MPS.metabs, "clr"), "PCoA", "euclidean")}
+\NormalTok{ord.metabs }\OtherTok{\textless{}{-}} \FunctionTok{ordinate}\NormalTok{(MPS.metabs, }\StringTok{"PCoA"}\NormalTok{, }\StringTok{"euclidean"}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{procrustes}\NormalTok{(}\AttributeTok{X =}\NormalTok{ ord}\FloatTok{.16}\NormalTok{S}\SpecialCharTok{$}\NormalTok{vectors, }\AttributeTok{Y =}\NormalTok{ ord.metabs}\SpecialCharTok{$}\NormalTok{vectors, }\AttributeTok{scale=}\NormalTok{T))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Multi_Omics_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{protest}\NormalTok{(}\AttributeTok{X =}\NormalTok{ ord}\FloatTok{.16}\NormalTok{S}\SpecialCharTok{$}\NormalTok{vectors, }\AttributeTok{Y =}\NormalTok{ ord.metabs}\SpecialCharTok{$}\NormalTok{vectors, }\AttributeTok{permutations =} \DecValTok{99999}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## protest(X = ord.16S$vectors, Y = ord.metabs$vectors, permutations = 99999) 
+## 
+## Procrustes Sum of Squares (m12 squared):        0.5193 
+## Correlation in a symmetric Procrustes rotation: 0.6933 
+## Significance:  0.00016 
+## 
+## Permutation: free
+## Number of permutations: 99999
+\end{verbatim}
+
+These results show a significant relation between microbiome composition
+and circulating metabolites.
+
+\hypertarget{rcca}{%
+\section{rCCA}\label{rcca}}
+
+CCA is dimensionality reduction approach by maximizing the correlation
+of the features between the datasets. Variance in the data that is not
+coherent between both datasets is thereby reduced.
+
+We will apply a regularized form of CCA, which is required if you want
+to perform CCA on datasets with a higher number of features than
+samples.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(MPS}\FloatTok{.16}\NormalTok{S.reduced}\SpecialCharTok{@}\NormalTok{otu\_table}\SpecialCharTok{@}\NormalTok{.Data)}
+\NormalTok{Y }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(MPS.metabs.reduced}\SpecialCharTok{@}\NormalTok{otu\_table}\SpecialCharTok{@}\NormalTok{.Data)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{perform-the-cca}{%
+\section{perform the CCA}\label{perform-the-cca}}
+
+There are two regularisation methods available. Here we apply the
+shrinkage method as feature counts are substantially larger than the
+number of samples.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rcc.MPS }\OtherTok{\textless{}{-}} \FunctionTok{rcc}\NormalTok{(X,Y, }\AttributeTok{method =} \StringTok{\textquotesingle{}shrinkage\textquotesingle{}}\NormalTok{) }
+\CommentTok{\# examine the optimal lambda values after shrinkage }
+\FunctionTok{plot}\NormalTok{(rcc.MPS, }\AttributeTok{type =} \StringTok{"barplot"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Shrinkage"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Multi_Omics_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+The scree plot shows that there is a small drop off after two components
+indicating these two components capture more variance than by chance.
+
+We can plot the samples in this CCA ordination.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plotIndiv}\NormalTok{(rcc.MPS, }\AttributeTok{comp =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }
+          \AttributeTok{ind.names =} \ConstantTok{NULL}\NormalTok{,}
+          \AttributeTok{group =}\NormalTok{ MPS}\FloatTok{.16}\NormalTok{S}\SpecialCharTok{@}\NormalTok{sam\_data}\SpecialCharTok{$}\NormalTok{Sample\_Type, }\AttributeTok{rep.space =} \StringTok{"XY{-}variate"}\NormalTok{, }
+          \AttributeTok{legend =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{title =} \StringTok{\textquotesingle{}MPS, rCCA shrinkage XY{-}space\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Multi_Omics_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+This plot shows that if we focus only on coherent variance between the
+dataset, out healthy donor samples separate from preFMT samples.\\
+This implies there is a relation between fecal microbiome, plasma
+metabolites and health status (or other confounding factor)
+
+We can plot the projection of both datasets, similar to the procrustus
+plot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plotArrow}\NormalTok{(rcc.MPS, }\AttributeTok{group =}\NormalTok{ MPS}\FloatTok{.16}\NormalTok{S}\SpecialCharTok{@}\NormalTok{sam\_data}\SpecialCharTok{$}\NormalTok{Sample\_Type, }
+          \AttributeTok{col.per.group =} \FunctionTok{color.mixo}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{),}
+          \AttributeTok{title =} \StringTok{\textquotesingle{}(b) Nutrimouse, shrinkage method\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Multi_Omics_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+Besides the relations between the samples, we can also use CCA to find
+correlations between the datasets from the feature perspective. We can
+use either a circle plot, or a heatmap to visualize the correlations
+between the feature sets.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plotVar}\NormalTok{(rcc.MPS, }\AttributeTok{var.names =} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{),}
+        \AttributeTok{cex =} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{cutoff =} \FloatTok{0.5}\NormalTok{,}
+        \AttributeTok{title =} \StringTok{\textquotesingle{}(b) Nutrimouse, rCCA shrinkage comp 1 {-} 2\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Multi_Omics_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cim}\NormalTok{(rcc.MPS, }\AttributeTok{comp =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"metabolites"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"taxa"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+A difference between groups was not obvious from the unconstrained
+ordinations but now using a constrained approach shows there are
+interactions between omics datasets that seperate our groups. Some
+correlations between metabolites and microbes have also been identified,
+through the correlations are not very strong.
+
+\end{document}

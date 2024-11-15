@@ -2,7 +2,9 @@
 title: "Forth Day Multi Omics"
 author: "Mark davids"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -42,8 +44,6 @@ MPS.16S <- prune_samples(MPS.16S@sam_data$Sample_Type!="PostFMT", MPS.16S)
 MPS.16S@sam_data$Subject_ID %in% sample_names(MPS.metabs)
 sample_names(MPS.16S) <- MPS.16S@sam_data$Subject_ID
 taxa_names(MPS.16S) <- make.unique(paste(MPS.16S@tax_table[,6]))
-
-
 ```
 
 # Reorder phyloseq so they are in the same order
@@ -64,17 +64,52 @@ MPS.16S <- microbiome::aggregate_taxa(MPS.16S, "Genus")
 MPS.metabs <- prune_taxa(!MPS.metabs@tax_table[,"SUPER PATHWAY"] %in% "Xenobiotics" , MPS.metabs)
 ```
 
-# Procrustus
+For the CCA it is better to reduce the number of features. We will reduce it by only selecting 100 features with the highest variability.
 
-In order to run procrustus we will need ordinations of the dataset.
-For 16S we use default Bray-Curtis distance.Since metabolite data needs to be scaled we will use clr transformation. After CLR transformation euclidean distance is a very appriopriate distance metrics.
-For both sets we will use PCoA for ordination.
+```{r}
+nfeat=100
+asvs <- apply(microbiome::transform(MPS.16S, "Z")@otu_table@.Data,1,function(x) sum(abs(x))) %>% sort(decreasing = T) %>% head(nfeat) %>% names()
 
-To test the likelyhood of getting the obtained fit, we will performa the protest permutation test.
+MPS.16S.reduced <- prune_taxa(asvs, MPS.16S)
+
+metabs <- apply(microbiome::transform(MPS.metabs, "Z")@otu_table@.Data,1,function(x) sum(abs(x))) %>% sort(decreasing = T) %>% head(nfeat) %>% names()
+
+MPS.metabs.reduced <- prune_taxa(metabs, MPS.metabs)
+```
+
+# Regular ordination
+
+First we have a look at the datasets individually.
+
+```{r}
+plot_ordination(physeq = MPS.16S.reduced, ordination = ordinate(MPS.16S.reduced, "PCoA", "bray"), color="Sample_Type") + 
+  labs(title="PCoA Microbiome")
+plot_ordination(physeq = MPS.metabs.reduced, ordination = ordinate(MPS.metabs.reduced, "PCoA", "bray"), color="Sample_Type") + 
+  labs(title="PCoA Metabolites")
+```
+
+```{r}
+d <- phyloseq::distance(physeq = MPS.16S, "bray")
+adonis2(d~MPS.16S@sam_data$Sample_Type)
+
+d <- phyloseq::distance(physeq = MPS.metabs, "bray")
+adonis2(d~MPS.metabs@sam_data$Sample_Type)
+```
+
+Not obvious from the ordination, but there is a significant difference in plasma metabolites between healthy donors and metsyn subjects.
+
+# Procrustes
+
+We will use procrustes to test coherence between the two datasets.
+In order to run procrustes we will need ordinations of the dataset.
+For 16S we use default Bray-Curtis distance. For metabolites we will use regular euclidean distance. For both sets we will use PCoA for ordination.
+
+To test the probability of getting a better fit, we will perform the protest permutation test.
 
 ```{r}
 ord.16S <- ordinate(MPS.16S, "PCoA", "bray")
-ord.metabs <- ordinate(microbiome::transform(MPS.metabs, "clr"), "PCoA", "euclidean")
+#ord.metabs <- ordinate(microbiome::transform(MPS.metabs, "clr"), "PCoA", "euclidean")
+ord.metabs <- ordinate(MPS.metabs, "PCoA", "euclidean")
 
 plot(procrustes(X = ord.16S$vectors, Y = ord.metabs$vectors, scale=T))
 protest(X = ord.16S$vectors, Y = ord.metabs$vectors, permutations = 99999)
@@ -87,18 +122,8 @@ These results show a significant relation between microbiome composition and cir
 CCA is dimensionality reduction approach by maximizing the correlation of the features between the datasets. Variance in the data that is not coherent between both datasets is thereby reduced.
 
 We will apply a regularized form of CCA, which is required if you want to perform CCA on datasets with a higher number of features than samples.
-We will reduce the data somewhat by only selecting 100 features with the highest variability.
 
 ```{r}
-nfeat=100
-asvs <- apply(microbiome::transform(MPS.16S, "Z")@otu_table@.Data,1,function(x) sum(abs(x))) %>% sort(decreasing = T) %>% head(nfeat) %>% names()
-
-MPS.16S.reduced <- prune_taxa(asvs, MPS.16S)
-
-metabs <- apply(microbiome::transform(MPS.metabs, "Z")@otu_table@.Data,1,function(x) sum(abs(x))) %>% sort(decreasing = T) %>% head(nfeat) %>% names()
-
-MPS.metabs.reduced <- prune_taxa(metabs, MPS.metabs)
-
 X <- t(MPS.16S.reduced@otu_table@.Data)
 Y <- t(MPS.metabs.reduced@otu_table@.Data)
 ```
@@ -135,8 +160,8 @@ plotArrow(rcc.MPS, group = MPS.16S@sam_data$Sample_Type,
           col.per.group = color.mixo(1:5),
           title = '(b) Nutrimouse, shrinkage method')
 ```
-Besides the relations between the samples, we can also use CCA to find correlations between the datasets from the feature perspective.
-We can use either a circle plot, or a heatmap to visualize the correlations between the feature sets.
+
+Besides the relations between the samples, we can also use CCA to find correlations between the datasets from the feature perspective. We can use either a circle plot, or a heatmap to visualize the correlations between the feature sets.
 
 ```{r}
 plotVar(rcc.MPS, var.names = c(TRUE, TRUE),
@@ -148,9 +173,4 @@ plotVar(rcc.MPS, var.names = c(TRUE, TRUE),
 cim(rcc.MPS, comp = 1:2, xlab = "metabolites", ylab = "taxa")
 ```
 
-A difference between groups was not obvious from the unconstrained ordinations
-
-```{r}
-plot_ordination(physeq = MPS.16S.reduced, ordination = ordinate(MPS.16S, "PCoA", "bray"), color="Sample_Type")
-plot_ordination(physeq = MPS.metabs.reduced, ordination = ordinate(MPS.metabs.reduced, "PCoA", "bray"), color="Sample_Type")
-```
+A difference between groups was not obvious from the unconstrained ordinations but now using a constrained approach shows there are interactions between omics datasets that seperate our groups. Some correlations between metabolites and microbes have also been identified, through the correlations are not very strong.
